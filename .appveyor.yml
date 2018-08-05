@@ -22,7 +22,7 @@ environment:
   CI_OPT_GPG_PASSPHRASE:
     secure: 9W3TKuaDpCwfEF8yNbbbNCaelmjnZqHdxUqfITdKTWM=
   CI_OPT_MAVEN_CENTRAL_PASS:
-    secure: hYYznqP7ay6uXPBn6VTawQ==
+    secure: EadWkxS83ouKd0flOB6UNQ==
   CI_OPT_MAVEN_CENTRAL_USER:
     secure: WHUUaDWLfxrqrBMF0gFnwg==
   CI_OPT_SONAR_LOGIN_TOKEN:
