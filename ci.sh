@@ -20,7 +20,7 @@ if [ -z "${CI_OPT_SITE}" ]; then CI_OPT_SITE="true"; fi
 if [ -z "${CI_OPT_SITE_PATH_PREFIX}" ] && [ "${CI_OPT_GITHUB_SITE_PUBLISH}" == "true" ]; then
     # github site repo cloud-ready/cloud-ready (CI_OPT_GITHUB_SITE_REPO_NAME)
     CI_OPT_SITE_PATH_PREFIX="cloud-ready"
-elif [ -z "${CI_OPT_SITE_PATH_PREFIX}" ] && [ "${CI_OPT_GITHUB_SITE_PUBLISH}" == "true" ]; then
+elif [ -z "${CI_OPT_SITE_PATH_PREFIX}" ] && [ "${CI_OPT_GITHUB_SITE_PUBLISH}" == "false" ]; then
     # site in nexus3 raw repository
     CI_OPT_SITE_PATH_PREFIX="cloud-ready/spring-boot-starter-redisson"
 fi
