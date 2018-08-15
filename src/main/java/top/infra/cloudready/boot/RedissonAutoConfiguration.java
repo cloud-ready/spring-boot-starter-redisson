@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.boot.autoconfigure.data.redis.RedisAutoConfiguration;
 import org.springframework.boot.autoconfigure.data.redis.RedisProperties;
 import org.springframework.context.annotation.Bean;
@@ -19,13 +20,14 @@ import org.springframework.data.redis.core.RedisTemplate;
 
 @AutoConfigureAfter(RedisAutoConfiguration.class)
 @ConditionalOnClass({Redisson.class, RedisTemplate.class})
+@ConditionalOnProperty(name = {"spring.redis.host", "spring.redis.port"})
 @Configuration
 @Slf4j
 public class RedissonAutoConfiguration {
 
   private RedisProperties redisProperties;
 
-  @Value("${spring.redis.host}:${spring.redis.port}")
+  @Value("${spring.redis.host:127.0.0.1}:${spring.redis.port:6379}")
   private String address;
   @Value("${spring.redis.database:0}")
   private int database;
