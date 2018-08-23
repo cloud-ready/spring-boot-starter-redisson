@@ -10,8 +10,6 @@ import org.junit.runner.RunWith;
 import org.redisson.api.RMap;
 import org.redisson.api.RedissonClient;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.test.context.ContextConfiguration;
@@ -23,17 +21,9 @@ import top.infra.test.containers.InitializerCallbacks;
 
 @RunWith(SpringRunner.class)
 @Slf4j
-@SpringBootTest(classes = RedissonAutoTestApplicationTests.RedissonTestApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
+@SpringBootTest(classes = RedissonTestApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 @ContextConfiguration(initializers = GenericContainerInitializer.class)
-public class RedissonAutoTestApplicationTests {
-
-  @SpringBootApplication
-  public static class RedissonTestApplication {
-
-    public static void main(final String... args) {
-      SpringApplication.run(RedissonTestApplication.class, args);
-    }
-  }
+public class RedisStandaloneTests {
 
   @ClassRule
   public static final GenericContainer container = new GenericContainer("redis:3.0.2")

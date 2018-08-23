@@ -5,10 +5,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.redisson.Redisson;
 import org.redisson.api.RedissonClient;
 import org.redisson.config.Config;
-import org.redisson.config.SentinelServersConfig;
 import org.redisson.config.SingleServerConfig;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.autoconfigure.AutoConfigureAfter;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
@@ -23,14 +21,9 @@ import org.springframework.data.redis.core.RedisTemplate;
 @ConditionalOnProperty(name = {"spring.redis.host", "spring.redis.port"})
 @Configuration
 @Slf4j
-public class RedissonAutoConfiguration {
+public class RedissonStandaloneAutoConfiguration {
 
   private RedisProperties redisProperties;
-
-  @Value("${spring.redis.host:127.0.0.1}:${spring.redis.port:6379}")
-  private String address;
-  @Value("${spring.redis.database:0}")
-  private int database;
 
   @Autowired(required = false)
   public void setRedisProperties(final RedisProperties redisProperties) {
@@ -43,23 +36,6 @@ public class RedissonAutoConfiguration {
     final String redisAddress = schema + this.redisProperties.getHost() + ":" + this.redisProperties.getPort();
     log.info("redisAddress: {}", redisAddress);
     return redisAddress;
-  }
-
-  private SentinelServersConfig sentinelServers(final Config config) {
-    final int redisDatabase = this.redisProperties.getDatabase();
-    final String redisPassword = this.redisProperties.getPassword();
-    final String redisSentinelMaster = this.redisProperties.getSentinel().getMaster();
-    final String[] redisSentinelNodes = this.redisProperties.getSentinel().getNodes().split(",");
-
-    SentinelServersConfig sentinelServersConfig = config.useSentinelServers();
-    sentinelServersConfig.setMasterName(redisSentinelMaster);
-    sentinelServersConfig.addSentinelAddress(redisSentinelNodes);
-    sentinelServersConfig.setDatabase(redisDatabase);
-    if (redisPassword != null) { //StringUtils.isNotBlank(redisPassword)
-      sentinelServersConfig.setPassword(redisPassword);
-    }
-
-    return sentinelServersConfig;
   }
 
   private SingleServerConfig singleServer(final Config config) {
@@ -80,14 +56,7 @@ public class RedissonAutoConfiguration {
   @Bean
   public RedissonClient redissonClient() {
     final Config config = new Config();
-
-    final boolean sentinel = this.redisProperties.getSentinel() != null;
-    if (sentinel) {
-      this.sentinelServers(config);
-    } else {
-      this.singleServer(config);
-    }
-
+    this.singleServer(config);
     return Redisson.create(config);
   }
 }

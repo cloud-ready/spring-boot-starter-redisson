@@ -8,6 +8,7 @@ addons:
     - graphviz
     - openssl
 before_install:
+#- export JAVA_HOME=$HOME/oraclejdk10
 - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
 - bash install-jdk.sh -F 10 -L BCL --target /home/travis/oraclejdk10 --workspace $HOME/.cache/install-jdk
 - if [ -d /home/travis/oraclejdk10 ]; then sudo mkdir -p /usr/lib/jvm; sudo ln -s /home/travis/oraclejdk10 /usr/lib/jvm/java-10-oracle; fi
