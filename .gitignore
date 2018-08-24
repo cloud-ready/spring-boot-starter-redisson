@@ -18,6 +18,10 @@ buildNumber.properties
 
 *.asc
 git.properties
+.vagrant
+
+/*.tar.gz
+/*.zip
 
 **/src/site/markdown/README.md
 **/src/site/markdown/src/readme

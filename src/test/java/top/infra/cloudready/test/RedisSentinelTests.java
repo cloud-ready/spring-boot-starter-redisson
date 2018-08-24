@@ -23,6 +23,8 @@ import java.net.InetAddress;
 @SpringBootTest(classes = RedissonTestApplication.class, webEnvironment = WebEnvironment.RANDOM_PORT)
 public class RedisSentinelTests {
 
+  static final String REDIS_IMAGE = "cloudready/redis:3.0.6";
+
   public static String getLocalHostQuietly() {
     String localAddress;
     try {
@@ -37,14 +39,14 @@ public class RedisSentinelTests {
   private static final String LOCALHOST_STR = getLocalHostQuietly();
 
   @ClassRule
-  public static final GenericContainer redisMaster = new GenericContainer("cloudready/redis:3.0.6")
+  public static final GenericContainer redisMaster = new GenericContainer(REDIS_IMAGE)
       .withCommand("redis-server", "--port", "6379")
       .withExposedPorts(6379)
       .withExtraHost("redis-sentinel", LOCALHOST_STR)
       .withExtraHost("redis-slave", LOCALHOST_STR);
 
   @ClassRule
-  public static final GenericContainer redisSentinel = new GenericContainer("cloudready/redis:3.0.6")
+  public static final GenericContainer redisSentinel = new GenericContainer(REDIS_IMAGE)
       .withCommand("redis-server", "/etc/redis/sentinel.conf", "--sentinel")
       .withEnv("SENTINEL_MASTER_HOSTORIP", LOCALHOST_STR)
       .withEnv("SENTINEL_MASTER_NAME", "mymaster")
@@ -55,13 +57,14 @@ public class RedisSentinelTests {
       .withExtraHost("redis-slave", LOCALHOST_STR);
 
   @ClassRule
-  public static final GenericContainer redisSlave = new GenericContainer("cloudready/redis:3.0.6")
+  public static final GenericContainer redisSlave = new GenericContainer(REDIS_IMAGE)
       .withCommand("redis-server", "--slaveof", LOCALHOST_STR, "6379", "--port", "6381")
       .withExposedPorts(6381)
       .withExtraHost("redis-master", LOCALHOST_STR)
       .withExtraHost("redis-sentinel", LOCALHOST_STR);
 
   static {
+    log.info("LOCALHOST_STR: {}", LOCALHOST_STR);
     redisMaster.setPortBindings(newArrayList("6379:6379"));
     redisSentinel.setPortBindings(newArrayList("26379:26379"));
     redisSlave.setPortBindings(newArrayList("6381:6381"));

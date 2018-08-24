@@ -12,6 +12,20 @@
     </parent>
     <version>1.0.2-SNAPSHOT</version>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <configuration>
+                    <failOnNoGitDirectory>false</failOnNoGitDirectory>
+                    <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+                    <skip>false</skip>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
     <!-- @formatter:off -->
     <dependencies>
         <dependency><groupId>io.netty</groupId><artifactId>netty-buffer</artifactId><scope>runtime</scope></dependency>

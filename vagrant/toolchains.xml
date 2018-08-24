@@ -1,0 +1,25 @@
+<toolchains xmlns="http://maven.apache.org/POM/4.0.0"
+            xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+            xsi:schemaLocation="http://maven.apache.org/TOOLCHAINS/1.1.0 https://maven.apache.org/xsd/toolchains-1.1.0.xsd">
+
+    <toolchain>
+        <type>jdk</type>
+        <provides>
+            <version>1.8</version>
+            <!--<vendor>oracle</vendor>-->
+        </provides>
+        <configuration>
+            <!-- OSX style: /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home -->
+            <!-- travis-ci style: /usr/lib/jvm/java-8-oracle -->
+            <!--
+            # Disable SIP (System Integrity Protection)
+            # see: https://apple.stackexchange.com/questions/208764/cant-write-to-usr-lib
+            # Boot by Recovery partition and run `csrutil disable` in Terminal.app
+            mkdir -p /usr/lib/jvm
+            ln -s /Library/Java/JavaVirtualMachines/jdk1.8.0_171.jdk/Contents/Home /usr/lib/jvm/java-8-oracle
+            # run `csrutil enable` in Terminal.app
+            -->
+            <jdkHome>/usr/lib/jvm/java-8-oracle</jdkHome>
+        </configuration>
+    </toolchain>
+</toolchains>
