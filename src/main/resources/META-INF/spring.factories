@@ -1,2 +1,3 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-top.infra.cloudready.boot.RedissonAutoConfiguration
+top.infra.cloudready.boot.RedissonStandaloneAutoConfiguration,\
+top.infra.cloudready.boot.RedissonSentinelAutoConfiguration
