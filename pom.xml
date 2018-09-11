@@ -10,7 +10,7 @@
         <groupId>top.infra</groupId>
         <version>1.0.2.U1</version>
     </parent>
-    <version>1.0.3</version>
+    <version>1.0.4-SNAPSHOT</version>
 
     <build>
         <plugins>
