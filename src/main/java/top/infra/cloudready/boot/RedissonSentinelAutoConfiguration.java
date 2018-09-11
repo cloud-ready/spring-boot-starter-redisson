@@ -35,8 +35,8 @@ public class RedissonSentinelAutoConfiguration {
   public String[] getRedisSentinelNodes() {
     //should add schema prefix "redis://" or "rediss://" for redisson version >= 3.7.0
     final String schema = this.redisProperties.isSsl() ? "rediss://" : "redis://";
-    final String[] redisSentinelNodes = Pattern.compile(",") //
-        .splitAsStream(this.redisProperties.getSentinel().getNodes()) //
+    final String[] redisSentinelNodes = this.redisProperties.getSentinel().getNodes() //
+        .stream() //
         .map(node -> schema + node) //
         .toArray(String[]::new);
     log.info("redisNodes: {}", (Object) redisSentinelNodes);

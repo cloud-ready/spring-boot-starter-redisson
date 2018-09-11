@@ -71,6 +71,11 @@ Vagrant.configure("2") do |config|
     vb.memory = "2048"
   end
 
+  # default synced folder
+  config.vm.synced_folder ".", "/vagrant"
+  config.vm.synced_folder "~/.m2", "/home/vagrant/.m2",
+    owner: "vagrant", group: "vagrant", mount_options: ["uid=900", "gid=900"]
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
