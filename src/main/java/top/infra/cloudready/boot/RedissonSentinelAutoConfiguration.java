@@ -25,45 +25,45 @@ import java.util.regex.Pattern;
 @Slf4j
 public class RedissonSentinelAutoConfiguration {
 
-  private RedisProperties redisProperties;
+    private RedisProperties redisProperties;
 
-  @Autowired(required = false)
-  public void setRedisProperties(final RedisProperties redisProperties) {
-    this.redisProperties = redisProperties;
-  }
-
-  public String[] getRedisSentinelNodes() {
-    //should add schema prefix "redis://" or "rediss://" for redisson version >= 3.7.0
-    final String schema = this.redisProperties.isSsl() ? "rediss://" : "redis://";
-    final String[] redisSentinelNodes = Pattern.compile(",") //
-        .splitAsStream(this.redisProperties.getSentinel().getNodes()) //
-        .map(node -> schema + node) //
-        .toArray(String[]::new);
-    log.info("redisNodes: {}", (Object) redisSentinelNodes);
-    return redisSentinelNodes;
-  }
-
-  private SentinelServersConfig sentinelServers(final Config config) {
-    final int redisDatabase = this.redisProperties.getDatabase();
-    final String redisPassword = this.redisProperties.getPassword();
-    final String redisSentinelMaster = this.redisProperties.getSentinel().getMaster();
-    final String[] redisSentinelNodes = this.getRedisSentinelNodes();
-
-    SentinelServersConfig sentinelServersConfig = config.useSentinelServers();
-    sentinelServersConfig.setMasterName(redisSentinelMaster);
-    sentinelServersConfig.addSentinelAddress(redisSentinelNodes);
-    sentinelServersConfig.setDatabase(redisDatabase);
-    if (redisPassword != null) { //StringUtils.isNotBlank(redisPassword)
-      sentinelServersConfig.setPassword(redisPassword);
+    @Autowired(required = false)
+    public void setRedisProperties(final RedisProperties redisProperties) {
+        this.redisProperties = redisProperties;
     }
 
-    return sentinelServersConfig;
-  }
+    public String[] getRedisSentinelNodes() {
+        //should add schema prefix "redis://" or "rediss://" for redisson version >= 3.7.0
+        final String schema = this.redisProperties.isSsl() ? "rediss://" : "redis://";
+        final String[] redisSentinelNodes = Pattern.compile(",") //
+            .splitAsStream(this.redisProperties.getSentinel().getNodes()) //
+            .map(node -> schema + node) //
+            .toArray(String[]::new);
+        log.info("redisNodes: {}", (Object) redisSentinelNodes);
+        return redisSentinelNodes;
+    }
 
-  @Bean
-  public RedissonClient redissonClient() {
-    final Config config = new Config();
-    this.sentinelServers(config);
-    return Redisson.create(config);
-  }
+    private SentinelServersConfig sentinelServers(final Config config) {
+        final int redisDatabase = this.redisProperties.getDatabase();
+        final String redisPassword = this.redisProperties.getPassword();
+        final String redisSentinelMaster = this.redisProperties.getSentinel().getMaster();
+        final String[] redisSentinelNodes = this.getRedisSentinelNodes();
+
+        SentinelServersConfig sentinelServersConfig = config.useSentinelServers();
+        sentinelServersConfig.setMasterName(redisSentinelMaster);
+        sentinelServersConfig.addSentinelAddress(redisSentinelNodes);
+        sentinelServersConfig.setDatabase(redisDatabase);
+        if (redisPassword != null) { //StringUtils.isNotBlank(redisPassword)
+            sentinelServersConfig.setPassword(redisPassword);
+        }
+
+        return sentinelServersConfig;
+    }
+
+    @Bean
+    public RedissonClient redissonClient() {
+        final Config config = new Config();
+        this.sentinelServers(config);
+        return Redisson.create(config);
+    }
 }

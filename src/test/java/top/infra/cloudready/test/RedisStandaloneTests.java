@@ -25,26 +25,26 @@ import top.infra.test.containers.InitializerCallbacks;
 @ContextConfiguration(initializers = GenericContainerInitializer.class)
 public class RedisStandaloneTests {
 
-  @ClassRule
-  public static final GenericContainer container = new GenericContainer("redis:3.0.2")
-      .withExposedPorts(6379);
+    @ClassRule
+    public static final GenericContainer container = new GenericContainer("redis:3.0.2")
+        .withExposedPorts(6379);
 
-  static {
-    GenericContainerInitializer.onInitialize(container, InitializerCallbacks.SPRING_DATA_REDIS);
-  }
+    static {
+        GenericContainerInitializer.onInitialize(container, InitializerCallbacks.SPRING_DATA_REDIS);
+    }
 
-  @Autowired
-  private RedissonClient redissonClient;
+    @Autowired
+    private RedissonClient redissonClient;
 
-  @Test
-  public void testRedisson() {
-    final RMap<String, String> map = this.redissonClient.getMap("map");
+    @Test
+    public void testRedisson() {
+        final RMap<String, String> map = this.redissonClient.getMap("map");
 
-    final String key = "key";
-    final String value = "value";
+        final String key = "key";
+        final String value = "value";
 
-    map.put(key, value);
-    assertEquals(value, map.get(key));
-    map.remove(key);
-  }
+        map.put(key, value);
+        assertEquals(value, map.get(key));
+        map.remove(key);
+    }
 }
