@@ -3,8 +3,8 @@
 # Issue 4072 artifacts ignore paths                              , see: https://gitlab.com/gitlab-org/gitlab-ce/issues/4072
 
 before_script:
-- set -ex;
 - if [ -f ~/env ]; then source ~/env; fi;
+- set -ex;
 # info
 - echo "HOST_HOSTNAME '${HOST_HOSTNAME}', HOST_IPADDRESS '${HOST_IPADDRESS}'";
   echo working directory `pwd`;
