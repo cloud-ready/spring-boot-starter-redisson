@@ -8,9 +8,9 @@
     <parent>
         <artifactId>cloud-ready-parent</artifactId>
         <groupId>top.infra</groupId>
-        <version>1.0.2.U5</version>
+        <version>1.0.2.U6</version>
     </parent>
-    <version>1.0.3.U2</version>
+    <version>1.0.3.U3</version>
 
     <build>
         <plugins>
