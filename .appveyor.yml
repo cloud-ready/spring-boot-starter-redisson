@@ -40,7 +40,7 @@ cache:
 - "$HOME/.sonar/cache"
 
 # see: https://www.appveyor.com/docs/build-environment/
-stack: node 9, jdk 8, jdk 9, jdk 10
+stack: node 9, jdk 8, jdk 9, jdk 11
 
 install:
 - ls -al
