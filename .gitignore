@@ -27,4 +27,6 @@ git.properties
 **/src/site/markdown/src/readme
 **/src/site/resources
 
+/install-jdk.sh*
+
 NO_COMMIT.md
