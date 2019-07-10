@@ -8,9 +8,9 @@
     <parent>
         <artifactId>cloud-ready-parent</artifactId>
         <groupId>top.infra</groupId>
-        <version>2.0.4-SNAPSHOT</version>
+        <version>3.0.0-SNAPSHOT</version>
     </parent>
-    <version>2.0.0-SNAPSHOT</version>
+    <version>3.0.0-SNAPSHOT</version>
 
     <build>
         <plugins>
@@ -73,5 +73,8 @@
     </dependencyManagement>
 
     <properties>
+        <java.version>8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 </project>
