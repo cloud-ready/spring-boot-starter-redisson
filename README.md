@@ -27,7 +27,7 @@ Maven:
 <dependency>
     <groupId>top.infra</groupId>
     <artifactId>spring-boot-starter-redisson</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 
