@@ -7,6 +7,8 @@ release.properties
 dependency-reduced-pom.xml
 buildNumber.properties
 .mvn/timing.properties
+/.mvn/profiler-report/
+/.mvn/*Repository/
 
 # Avoid ignoring Maven wrapper jar file (.jar files are usually ignored)
 !/.mvn/wrapper/maven-wrapper.jar
@@ -26,5 +28,7 @@ git.properties
 **/src/site/markdown/README.md
 **/src/site/markdown/src/readme
 **/src/site/resources
+
+/install-jdk.sh*
 
 NO_COMMIT.md

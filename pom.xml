@@ -7,10 +7,10 @@
     <packaging>jar</packaging>
     <parent>
         <artifactId>cloud-ready-parent</artifactId>
-        <groupId>top.infra</groupId>
-        <version>1.0.2.U1</version>
+        <groupId>top.infra.cloud-ready</groupId>
+        <version>3.0.2</version>
     </parent>
-    <version>1.0.3</version>
+    <version>3.0.0</version>
 
     <build>
         <plugins>
@@ -24,11 +24,11 @@
                 </configuration>
             </plugin>
             <plugin>
-            <artifactId>maven-surefire-plugin</artifactId>
-            <configuration>
-                <forkCount>1</forkCount>
-                <reuseForks>false</reuseForks>
-            </configuration>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <forkCount>1</forkCount>
+                    <reuseForks>false</reuseForks>
+                </configuration>
             </plugin>
         </plugins>
     </build>
@@ -61,7 +61,7 @@
         <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-data-redis</artifactId></dependency>
 
         <dependency><groupId>org.springframework.boot</groupId><artifactId>spring-boot-starter-undertow</artifactId><scope>test</scope></dependency>
-        <dependency><groupId>top.infra</groupId><artifactId>spring-boot-test-support</artifactId><scope>test</scope></dependency>
+        <dependency><groupId>top.infra.cloud-ready</groupId><artifactId>spring-boot-test-support</artifactId><scope>test</scope></dependency>
     </dependencies>
     <!-- @formatter:on -->
 
@@ -73,5 +73,8 @@
     </dependencyManagement>
 
     <properties>
+        <java.version>8</java.version>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 </project>

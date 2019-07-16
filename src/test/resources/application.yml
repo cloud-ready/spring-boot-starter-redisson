@@ -1,3 +1,2 @@
-
 spring.redis:
-  host: 127.0.0.1
+  host: ${SPRING_REDIS_HOST:${HOST_IPADDRESS:127.0.0.1}}
